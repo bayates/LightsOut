@@ -8,51 +8,32 @@ namespace LightsOut
     {
         private const int GridOffset = 25;
         private const int GridLength = 200;
-        private const int NumCells = 3;
-        private const int CellLength = GridLength / NumCells;
 
-        private bool[,] grid;
-        private Random rand;
+        private LightsOutGame lightsOutGame;
 
         public MainForm()
         {
             InitializeComponent();
 
-            rand = new Random();    // Initializes random number generator
-
-            grid = new bool[NumCells, NumCells];
-
-            // Turn entire grid on
-            for (int r = 0; r < NumCells; r++)
-                for (int c = 0; c < NumCells; c++)
-                    grid[r, c] = true;
-        }
-
-        private bool PlayerWon()
-        {
-            // Return false if any cell is on, true otherwise
-            for (int r = 0; r < NumCells; r++)
-                for (int c = 0; c < NumCells; c++)
-                    if (grid[r, c])
-                        return false;
-
-            return true;
+            lightsOutGame = new LightsOutGame();
         }
 
         private void MainForm_Paint(object sender, PaintEventArgs e)
         {
+            int CellLength = GridLength / lightsOutGame.GridSize;
+
             Graphics g = e.Graphics;
 
-            for (int r = 0; r < NumCells; r++)
+            for (int r = 0; r < lightsOutGame.GridSize; r++)
             {
-                for (int c = 0; c < NumCells; c++)
+                for (int c = 0; c < lightsOutGame.GridSize; c++)
                 {
                     // Get proper pen and brush for on/off
                     // grid selection
                     Brush brush;
                     Pen pen;
 
-                    if (grid[r, c])
+                    if (lightsOutGame.GetGridValue(r, c))
                     {
                         pen = Pens.Black;
                         brush = Brushes.White;  // On
@@ -76,6 +57,9 @@ namespace LightsOut
 
         private void MainForm_MouseDown(object sender, MouseEventArgs e)
         {
+            int CellLength = GridLength / lightsOutGame.GridSize;
+            int NumCells = lightsOutGame.GridSize;
+
             // Make sure click was inside the grid
             if (e.X < GridOffset || e.X > CellLength * NumCells + GridOffset ||
                 e.Y < GridOffset || e.Y > CellLength * NumCells + GridOffset)
@@ -85,17 +69,13 @@ namespace LightsOut
             int r = (e.Y - GridOffset) / CellLength;
             int c = (e.X - GridOffset) / CellLength;
 
-            // Invert selected box and all surrounding boxes
-            for (int i = r - 1; i <= r + 1; i++)
-                for (int j = c - 1; j <= c + 1; j++)
-                    if (i >= 0 && i < NumCells && j >= 0 && j < NumCells)
-                        grid[i, j] = !grid[i, j];
+            lightsOutGame.Move(r, c);
 
             // Redraw grid
             this.Invalidate();
 
             // Cehck to see if puzzle has been solved
-            if (PlayerWon())
+            if (lightsOutGame.IsGameOver())
             {
                 // Display winner dialog box
                 MessageBox.Show(this, "Congratulations! You've won!", "Lights Out!", 
@@ -105,10 +85,7 @@ namespace LightsOut
 
         private void newGameButton_Click(object sender, EventArgs e)
         {
-            // Fill grid with either white or black
-            for (int r = 0; r < NumCells; r++)
-                for (int c = 0; c < NumCells; c++)
-                    grid[r, c] = rand.Next(2) == 1;
+            lightsOutGame.NewGame();
 
             // Redraw grid
             this.Invalidate();
