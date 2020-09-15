@@ -6,8 +6,8 @@ namespace LightsOut
 {
     public partial class MainForm : Form
     {
-        private const int GridOffset = 25;
-        private const int GridLength = 200;
+        private int GridOffset = 25;
+        private int GridLength = 200;
 
         private LightsOutGame lightsOutGame;
 
@@ -100,6 +100,26 @@ namespace LightsOut
         {
             AboutForm aboutBox = new AboutForm();
             aboutBox.ShowDialog(this);
+        }
+
+        private void MainForm_Resize(object sender, EventArgs e)
+        {
+            int shorterSide;
+            const int widthOffset = 35;
+            const int heightOffset = 60;
+
+            if (this.Width - 2 * widthOffset < this.Height - 2 * heightOffset)
+            {
+                GridLength = this.Width - 2 * widthOffset;
+            }
+            else
+            {
+                GridLength = this.Height - 2 * heightOffset;
+            }
+
+            exitButton.Left = widthOffset + GridLength - 85;
+
+            this.Invalidate();
         }
     }
 }

@@ -65,19 +65,19 @@
             // newToolStripMenuItem
             // 
             this.newToolStripMenuItem.Name = "newToolStripMenuItem";
-            this.newToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.newToolStripMenuItem.Size = new System.Drawing.Size(98, 22);
             this.newToolStripMenuItem.Text = "&New";
             this.newToolStripMenuItem.Click += new System.EventHandler(this.newGameButton_Click);
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(177, 6);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(95, 6);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(98, 22);
             this.exitToolStripMenuItem.Text = "E&xit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitButton_Click);
             // 
@@ -92,15 +92,16 @@
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
             this.aboutToolStripMenuItem.Text = "&About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
             // newGameButton
             // 
+            this.newGameButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.newGameButton.Location = new System.Drawing.Point(25, 240);
             this.newGameButton.Name = "newGameButton";
-            this.newGameButton.Size = new System.Drawing.Size(75, 23);
+            this.newGameButton.Size = new System.Drawing.Size(70, 23);
             this.newGameButton.TabIndex = 1;
             this.newGameButton.Text = "New Game";
             this.newGameButton.UseVisualStyleBackColor = true;
@@ -108,6 +109,7 @@
             // 
             // exitButton
             // 
+            this.exitButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.exitButton.Location = new System.Drawing.Point(150, 240);
             this.exitButton.Name = "exitButton";
             this.exitButton.Size = new System.Drawing.Size(75, 23);
@@ -124,15 +126,17 @@
             this.Controls.Add(this.exitButton);
             this.Controls.Add(this.newGameButton);
             this.Controls.Add(this.menuStrip1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(810, 960);
+            this.MinimumSize = new System.Drawing.Size(270, 320);
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Lights Out!";
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.MainForm_Paint);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MainForm_MouseDown);
+            this.Resize += new System.EventHandler(this.MainForm_Resize);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
