@@ -104,22 +104,20 @@ namespace LightsOut
 
         private void MainForm_Resize(object sender, EventArgs e)
         {
-            int shorterSide;
             const int widthOffset = 35;
             const int heightOffset = 60;
+            int gridWidth = Width - 2 * widthOffset;
+            int gridHeight = Height - 2 * heightOffset;
 
-            if (this.Width - 2 * widthOffset < this.Height - 2 * heightOffset)
-            {
-                GridLength = this.Width - 2 * widthOffset;
-            }
-            else
-            {
-                GridLength = this.Height - 2 * heightOffset;
-            }
+            // Set GridLength to the lesser dimension
+            GridLength = (gridWidth < gridHeight) ? gridWidth : gridHeight;
 
+            // Reposition buttons to follow grid
+            newGameButton.Top = GridLength + 40;
+            exitButton.Top = GridLength + 40;
             exitButton.Left = widthOffset + GridLength - 85;
 
-            this.Invalidate();
+            Invalidate();
         }
     }
 }
