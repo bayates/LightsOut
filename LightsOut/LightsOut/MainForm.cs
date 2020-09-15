@@ -119,5 +119,12 @@ namespace LightsOut
 
             Invalidate();
         }
+
+        private void SizeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            int newGridSize = Int32.Parse(sender.ToString().Substring(1, 1));
+            lightsOutGame.GridSize = newGridSize;
+            Invalidate();
+        }
     }
 }
